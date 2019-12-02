@@ -102,26 +102,27 @@
 				$("#name,#email").blur(function() {
 					var name = $('#name').val()
 					var email = $('#email').val()
-					$.ajax({
-						url: "/user/checkDuplicateregist",
-						type: "POST",
-						dataType: "json",
-						data: {
-							"name": name,
-							"email": email
-						},
-						success: function(data) {
-							for (var i in data) {
-								var job = data[i]
-								alert(job)
+					if (name != "" || email != "") {
+						$.ajax({
+							url: "/user/checkDuplicateregist",
+							type: "POST",
+							dataType: "json",
+							data: {
+								"name": name,
+								"email": email
+							},
+							success: function(data) {
+								for (var i in data) {
+									var result = data[i]
+									$("#name").after('<p>' + result + '</p>')
+									alert(result)
+								}
+							},
+							error: function(data) {
+								alert(data);
 							}
-							var result = data.result;
-							alert(result)
-						},
-						error: function(data) {
-							alert(data);
-						}
-					});
+						});
+					}
 				})
 			})
 
