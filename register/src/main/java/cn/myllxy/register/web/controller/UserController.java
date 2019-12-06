@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
@@ -24,12 +25,19 @@ public class UserController {
 
     @RequestMapping(value = "/checkDuplicateregist", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> checkDuplicateregist(String name, String email) {
+    public Map<String, String> checkDuplicateregist(
+            @RequestParam(value = "name", defaultValue = "") String name,
+            @RequestParam(value = "email", defaultValue = "") String email) {
         Map<String, String> map = new HashMap<>();
         User user = ui.checkDuplicateregist(name, email);
         // 用户名或者邮箱已经存在，向前台反映
         if (user != null) {
-            map.put("result", "不可以注册");
+            if (user.getName().equals(name)) {
+                map.put("name", "用户名重复,不可以注册");
+            }
+            if (user.getEmail().equals(email)) {
+                map.put("email", "邮箱重复,不可以注册");
+            }
         } else {
             map.put("result", "可以注册");
         }
