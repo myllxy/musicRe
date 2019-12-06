@@ -107,9 +107,9 @@
             var name = $("#name").val()
             var email = $('#email').val()
             /*正则表达式：
-             * 字母或下划线开始,然后是@,然后是任意字母或字符串,然后是.,然后是2到4个字母
+             * 字母或下划线开始可以加下划线或者"-",然后是@,然后是任意字母或字符串,然后是.,然后是2到4个字母
              * */
-            var reg = /^([a-zA-Z]|[0-9])+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+            var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
             $("#namep,#emailp").remove()
             if (email !== "" && !reg.test(email)) {
                 $("#email").after('<p id="emailp">邮箱格式输入错误</p>')
