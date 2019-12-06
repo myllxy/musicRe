@@ -43,11 +43,11 @@
                     <p>Let's create your account</p>
                     <div class="lowin-group">
                         <label>Name</label>
-                        <input type="text" name="name" autocomplete="name" class="lowin-input" id="name">
+                        <input type="text" name="name" class="lowin-input" id="name">
                     </div>
                     <div class="lowin-group">
                         <label>Email</label>
-                        <input type="email" autocomplete="email" name="email" class="lowin-input" id="email">
+                        <input type="text" name="email" class="lowin-input" id="email">
                     </div>
                     <div class="lowin-group">
                         <label>Password</label>
@@ -106,7 +106,14 @@
         $("#name,#email").blur(function () {
             var name = $("#name").val()
             var email = $('#email').val()
+            /*正则表达式：
+             * 字母或下划线开始,然后是@,然后是任意字母或字符串,然后是.,然后是2到4个字母
+             * */
+            var reg = /^([a-zA-Z]|[0-9])+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
             $("#namep,#emailp").remove()
+            if (email !== "" && !reg.test(email)) {
+                $("#email").after('<p id="emailp">邮箱格式输入错误</p>')
+            }
             if (name !== "" || email !== "") {
                 $.ajax({
                     url: "/user/checkDuplicateregist",
@@ -123,13 +130,13 @@
                                 // ZENG.msgbox.show("服务器繁忙，请稍后再试。", i, 3000);
                                 $("#name").after('<p id="namep">' + result + '</p>')
                             }
-                            if (name !== "" && i === "email") {
+                            if (email !== "" && i === "email") {
                                 $("#email").after('<p id="emailp">' + result + '</p>')
                             }
                             if (name !== "" && i === "result") {
                                 $("#name").after('<p id="namep">' + result + '</p>')
                             }
-                            if (email !== "" && i === "result") {
+                            if (email !== "" && reg.test(email) && i === "result") {
                                 $("#email").after('<p id="emailp">' + result + '</p>')
                             }
                         }
