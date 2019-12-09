@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="assets/myextra/auth.css">
 </head>
 <body>
-<div class="lowin lowin-red" style="bottom: 50px;">
-    <div class="lowin-brand" style="top: -40px;">
+<div class="lowin lowin-red">
+    <div class="lowin-brand">
         <img src="assets/myextraimg/kodinger.jpg" alt="logo">
     </div>
-    <div class="lowin-wrapper" style="top: -50px;">
+    <div class="lowin-wrapper">
         <div class="lowin-box lowin-login">
             <div class="lowin-box-inner">
                 <form action="#" method="post" id="login">
@@ -51,11 +51,11 @@
                         <input type="password" name="password" autocomplete="current-password" class="lowin-input"
                                id="password">
                     </div>
-                    <button class="lowin-btn">
+                    <button class="lowin-btn" id="btn_regist">
                         Sign Up
                     </button>
                     <div class="text-foot">
-                        Already have an account? <a href="" class="login-link">Login</a>
+                        Already have an account? <a href="#login" class="login-link">Login</a>
                     </div>
                 </form>
             </div>

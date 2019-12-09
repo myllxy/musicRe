@@ -1,5 +1,6 @@
 var Auth = {
 	vars: {
+		/*在js中拿到组件对应的js对象*/
 		lowin: document.querySelector('.lowin'),
 		lowin_brand: document.querySelector('.lowin-brand'),
 		lowin_wrapper: document.querySelector('.lowin-wrapper'),
@@ -20,8 +21,10 @@ var Auth = {
 	register(e) {
 		Auth.vars.lowin_login.className += ' lowin-animated';
 		setTimeout(() => {
+			/*选择注册后隐藏登录界面*/
 			Auth.vars.lowin_login.style.display = 'none';
 		}, 500);
+		/*显示注册界面*/
 		Auth.vars.lowin_register.style.display = 'block';
 		Auth.vars.lowin_register.className += ' lowin-animated-flip';
 
@@ -31,14 +34,16 @@ var Auth = {
 	},
 	login(e) {
 		Auth.vars.lowin_register.classList.remove('lowin-animated-flip');
-		Auth.vars.lowin_register.className += ' lowin-animated-flipback';
+        Auth.vars.lowin_register.className += ' lowin-animated-flipback';
+        setTimeout(() => {
+            /*选择登录后隐藏注册界面*/
+            Auth.vars.lowin_register.style.display = 'none';
+        }, 500);
+        /*显示登录界面*/
 		Auth.vars.lowin_login.style.display = 'block';
-		Auth.vars.lowin_login.classList.remove('lowin-animated');
-		Auth.vars.lowin_login.className += ' lowin-animatedback';
-		setTimeout(() => {
-			Auth.vars.lowin_register.style.display = 'none';
-		}, 500);
-		
+        Auth.vars.lowin_login.classList.remove('lowin-animated');
+        Auth.vars.lowin_login.className += ' lowin-animatedback';
+
 		setTimeout(() => {
 			Auth.vars.lowin_register.classList.remove('lowin-animated-flipback');
 			Auth.vars.lowin_login.classList.remove('lowin-animatedback');
