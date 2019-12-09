@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -8,18 +8,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Login</title>
     <link rel="stylesheet" href="assets/myextra/auth.css">
-    <link rel="stylesheet" href="assets/myextra/msgbox.css"/>
 </head>
 <body>
-<div class="lowin lowin-red">
-    <div class="lowin-brand">
+<div class="lowin lowin-red" style="bottom: 50px;">
+    <div class="lowin-brand" style="top: -40px;">
         <img src="assets/myextraimg/kodinger.jpg" alt="logo">
     </div>
-    <div class="lowin-wrapper">
+    <div class="lowin-wrapper" style="top: -50px;">
         <div class="lowin-box lowin-login">
             <div class="lowin-box-inner">
                 <form action="#" method="post" id="login">
-                    <p>Sign in to continue</p>
                     <div class="lowin-group">
                         <label>Email <a href="#" class="login-back-link">Sign in?</a></label>
                         <input type="email" autocomplete="email" name="email" class="lowin-input">
@@ -40,21 +38,20 @@
         <div class="lowin-box lowin-register">
             <div class="lowin-box-inner">
                 <form action="#" method="post" id="register">
-                    <p>Let's create your account</p>
                     <div class="lowin-group">
                         <label>Name</label>
-                        <input type="text" name="name" class="lowin-input" id="name">
+                        <input type="text" name="name" autocomplete="name" class="lowin-input" id="name">
                     </div>
                     <div class="lowin-group">
                         <label>Email</label>
-                        <input type="text" name="email" class="lowin-input" id="email">
+                        <input type="email" autocomplete="email" name="email" class="lowin-input" id="email">
                     </div>
                     <div class="lowin-group">
                         <label>Password</label>
                         <input type="password" name="password" autocomplete="current-password" class="lowin-input"
                                id="password">
                     </div>
-                    <button class="lowin-btn" onclick="login()">
+                    <button class="lowin-btn">
                         Sign Up
                     </button>
                     <div class="text-foot">
@@ -67,52 +64,30 @@
     <footer class="lowin-footer" style="padding-top: 95px;">
     </footer>
 </div>
-<script type="text/javascript" src='assets/js/jquery.min.js'></script>
-<script type="text/javascript" src="assets/myextra/auth.js"></script>
-<script type="text/javascript" src="assets/myextra/msgbox.js"></script>
+<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+<script src="assets/myextra/auth.js"></script>
 <script type="text/javascript">
     Auth.init({
         login_url: '#login',
         forgot_url: '#forgot'
     });
-
-    function checkDuplicateregist() {
-        var name = $('#name').val()
-        var email = $('#email').val()
-        var xhr = getAjax(); //获得ajax对象
-        xhr.open("GET", "/user/checkDuplicateregist?name=" + name + "&&email=" + email + "")
-        // post方法需要添加该请求头,注意必须在open与send之间调用
-        // xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
-        var nameElement = document.getElementById("name")
-        var emailElement = document.getElementById("email")
-        xhr.onreadystatechange = function () { //回调函数
-            if (xhr.readyState == 4 && xhr.status == 200) { //获得响应数据
-                var text = xhr.responseText
-                console.debug(text)
-                if (text == "true") {
-                    nameElement.innerText = "可以使用";
-                } else {
-                    nameElement.innerText = "已经存在，请更换";
-                }
-            }
-
-        }
-        xhr.send(); //发送请求：
-        // xhr.send('n1='+num1+'&n2='+num2);
-
-    }
-
+    /*验证注册信息*/
     $(function () {
         $("#name,#email").blur(function () {
-            var name = $("#name").val()
-            var email = $("#email").val()
-            /*正则表达式：
+            const name = $("#name").val();
+            const email = $("#email").val();
+            /* 正则表达式：
              * 字母或数字开始可以加下划线或者"-",然后是@,然后是任意字母或字符串,然后是.,然后是2到4个字母
              * */
             var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
             $("#namep,#emailp").remove()
             if (email !== "" && !reg.test(email)) {
                 $("#email").after('<p id="emailp">邮箱格式输入错误</p>')
+                /*1.更改按键颜色
+                * 2.设置按键为不可以点击(即解除或者更换绑定事件)*/
+                const btn_regist = $("#btn_regist");
+                btn_regist.css("background-color", "grey")
+                btn_regist.unbind()
             }
             if (name !== "" || email !== "") {
                 $.ajax({
@@ -124,7 +99,7 @@
                         "email": email
                     },
                     success: function (data) {
-                        for (var i in data) {
+                        for (const i in data) {
                             var result = data[i]
                             if (name !== "" && i === "name") {
                                 // ZENG.msgbox.show("服务器繁忙，请稍后再试。", i, 3000);
@@ -148,32 +123,14 @@
             }
         })
     })
-
-    function login() {
-        var name = $('#name').val()
-        var email = $('#email').val()
-        var password = $('#password').val()
-        var xhr = getAjax(); //获得ajax对象
-        xhr.open("POST", "/user/checkDuplicateregist")
-        // post方法需要添加该请求头,注意必须在open与send之间调用
-        xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
-        var p = document.getElementById("name")
-        xhr.onreadystatechange = function () { //回调函数
-            if (xhr.readyState == 4 && xhr.status == 200) { //获得乡音数据
-                var text = xhr.responseText
-                if (text == "true") {
-                    p.innerText = "用户名可以使用";
-                } else {
-                    p.innerText = "用户名已经存在";
-                }
-            }
-
-        }
-        xhr.send(); //发送请求：
-    }
-
-    // 绑定注册事件
-    // $('#register')
+    /*注册用户*/
+    $(function () {
+        $("#btn_regist").click(function () {
+            const name = $("#name").val();
+            const email = $("#email").val();
+            alert(name + " " + email)
+        })
+    })
 </script>
 </body>
 </html>
