@@ -12,9 +12,9 @@ body {
 	--color-semidark: rgba(68, 160, 179, .5);
 
 	text-align: center;
+	margin: 60px 0 0 0;
 	font-family: 'Segoe UI';
 	font-size: 14px;
-	background-color: #FF6464;
 }
 
 .lowin .lowin-wrapper {
@@ -27,7 +27,6 @@ body {
 	height: 100%;
 	width: 360px;
 	margin: 0 auto;
-	background-color: #FF6464;
 }
 
 .lowin.lowin-red {
@@ -72,7 +71,6 @@ body {
 }
 
 .lowin .lowin-brand {
-	top: 50px;
 	overflow: hidden;
 	width: 100px;
 	height: 100px;
@@ -91,7 +89,6 @@ body {
 }
 
 .lowin .lowin-box {
-	padding-top: 50px;
 	width: 100%;
 	position: absolute;
 	left: 0;
@@ -200,6 +197,7 @@ body {
 
 .lowin .lowin-footer {
 	text-align: center;
+	margin: 30px 0;
 	font-size: 12px;
 	color: var(--color-semidark);
 	font-weight: 700;
