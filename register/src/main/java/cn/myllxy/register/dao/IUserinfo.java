@@ -8,4 +8,6 @@ import cn.myllxy.register.domain.User;
  */
 public interface IUserinfo {
     User checkDuplicateregist(String name, String email);
+
+    void register(String name, String email, String password);
 }

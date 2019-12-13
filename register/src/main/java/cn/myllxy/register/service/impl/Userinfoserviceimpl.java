@@ -19,4 +19,9 @@ public class Userinfoserviceimpl implements IUserinfoservice {
     public User checkDuplicateregist(String name, String email) {
         return ui.checkDuplicateregist(name, email);
     }
+
+    @Override
+    public void register(String name, String email, String password) {
+        ui.register(name, email, password);
+    }
 }

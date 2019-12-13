@@ -3,10 +3,14 @@ package cn.myllxy.register.dao.impl;
 import cn.myllxy.register.dao.IUserinfo;
 import cn.myllxy.register.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -32,5 +36,19 @@ public class Userinfodaoimpl implements IUserinfo {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void register(String name, String email, String password) {
+        String sql = "insert into user (name,email,password) values(?,?,?)";
+        try {
+            jdbcTemplate.update(sql, preparedStatement -> {
+                preparedStatement.setString(1, name);
+                preparedStatement.setString(2, email);
+                preparedStatement.setString(3, password);
+            });
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -37,7 +37,7 @@
         </div>
         <div class="lowin-box lowin-register">
             <div class="lowin-box-inner">
-                <form action="#" method="post" id="register">
+                <form method="post" id="register">
                     <div class="lowin-group">
                         <label>Name</label>
                         <input type="text" name="name" autocomplete="name" class="lowin-input" id="name">
@@ -51,7 +51,7 @@
                         <input type="password" name="password" autocomplete="current-password" class="lowin-input"
                                id="password">
                     </div>
-                    <button class="lowin-btn" id="btn_regist">
+                    <button type="submit" class="lowin-btn" id="btn_regist">
                         Sign Up
                     </button>
                     <div class="text-foot">
@@ -128,7 +128,32 @@
         $("#btn_regist").click(function () {
             const name = $("#name").val();
             const email = $("#email").val();
-            alert(name + " " + email)
+            const password = $("#password").val();
+            if (name !== "" && email !== "" && password !== "") {
+                $.ajax({
+                    url: "/user/register",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        "name": name,
+                        "email": email,
+                        "password": password
+                    },
+                    success: function (data) {
+                        alert("sss")
+                        for (const i in data) {
+                            const result = data[i];
+                            if (i === "register_result") {
+                                console.debug(result)
+                                alert(result)
+                            }
+                        }
+                    },
+                    error: function (data) {
+                        alert(data);
+                    }
+                });
+            }
         })
     })
 </script>
