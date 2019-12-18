@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- 用的是相对路径，不加这个forward后会报错 -->
-    <c:set var="baseurl" value="${pageContext.request.contextPath}"></c:set>
+    <c:set var="baseurl" value="${pageContext.request.contextPath}"/>
     <link rel="shortcut icon" type="image/png" href="assets/images/fev.png">
     <!-- Place favicon.ico in the root directory -->
 
@@ -217,7 +217,7 @@
     <script>
         $(document).ready(function () {
             $("#login_a").on('click', function () {
-                popWin.showWin("800", "650", "欢迎使用本网站", "login.jsp");
+                popWin.showWin("800", "600", "欢迎使用本网站", "login.jsp");
             });
         });
     </script>
