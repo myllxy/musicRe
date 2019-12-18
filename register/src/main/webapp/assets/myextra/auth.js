@@ -21,7 +21,7 @@ var Auth = {
 	register(e) {
 		Auth.vars.lowin_login.className += ' lowin-animated';
 		setTimeout(() => {
-			/*选择注册后隐藏登录界面*/
+			/*选择register_link后隐藏登录界面*/
 			Auth.vars.lowin_login.style.display = 'none';
 		}, 500);
 		/*显示注册界面*/
@@ -36,7 +36,7 @@ var Auth = {
 		Auth.vars.lowin_register.classList.remove('lowin-animated-flip');
         Auth.vars.lowin_register.className += ' lowin-animated-flipback';
         setTimeout(() => {
-            /*选择登录后隐藏注册界面*/
+            /*选择login_link后隐藏注册界面*/
             Auth.vars.lowin_register.style.display = 'none';
         }, 500);
         /*显示登录界面*/
@@ -121,6 +121,7 @@ var Auth = {
 		}
 
 		Auth.vars.forgot_link.addEventListener("click", (e) => {
+            Auth.brand();
 			Auth.forgot(e);
 		});
 
@@ -135,6 +136,7 @@ var Auth = {
 		});
 
 		Auth.vars.login_back_link.addEventListener("click", (e) => {
+            Auth.brand();
 			Auth.loginback(e);
 		});
 	}
