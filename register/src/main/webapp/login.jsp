@@ -26,7 +26,7 @@
                         <label>Password <a href="#" class="forgot-link">Forgot Password?</a></label>
                         <input type="password" name="password" autocomplete="current-password" class="lowin-input">
                     </div>
-                    <button class="lowin-btn login-btn">
+                    <button type="button" class="lowin-btn login-btn">
                         Sign In
                     </button>
                     <div class="text-foot">
@@ -51,7 +51,7 @@
                         <input type="password" name="password" autocomplete="current-password" class="lowin-input"
                                id="password">
                     </div>
-                    <button type="submit" class="lowin-btn" id="btn_regist">
+                    <button type="button" class="lowin-btn" id="btn_regist">
                         Sign Up
                     </button>
                     <div class="text-foot">
