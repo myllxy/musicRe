@@ -35,6 +35,7 @@ body {
     --color-grey: rgba(255, 100, 100, .06);
     --color-dark: rgba(255, 100, 100, .8);
     --color-semidark: rgba(255, 100, 100, .55);
+    --color-deprecated: rgba(192, 192, 192, 0.3);
 }
 
 .lowin.lowin-green {
@@ -170,6 +171,24 @@ body {
     padding: 15px;
     border-radius: 3px;
     background-color: var(--color-primary);
+    -webkit-box-shadow: 0 2px 7px var(--color-semidark);
+    box-shadow: 0 2px 7px var(--color-semidark);
+    font-weight: 700;
+    outline: 0;
+    cursor: pointer;
+    -webkit-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+/* 当注册条件不允许时设置注册按钮颜色为空--color-deprecated */
+.lowin-btn-deprecated {
+    display: inline-block;
+    width: 100%;
+    border: none;
+    color: #fff;
+    padding: 15px;
+    border-radius: 3px;
+    background-color: var(--color-deprecated);
     -webkit-box-shadow: 0 2px 7px var(--color-semidark);
     box-shadow: 0 2px 7px var(--color-semidark);
     font-weight: 700;
