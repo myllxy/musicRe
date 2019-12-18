@@ -140,11 +140,9 @@
                         "password": password
                     },
                     success: function (data) {
-                        alert("sss")
                         for (const i in data) {
                             const result = data[i];
                             if (i === "register_result") {
-                                console.debug(result)
                                 alert(result)
                             }
                         }
