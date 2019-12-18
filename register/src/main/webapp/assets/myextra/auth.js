@@ -21,7 +21,7 @@ var Auth = {
 	register(e) {
 		Auth.vars.lowin_login.className += ' lowin-animated';
 		setTimeout(() => {
-			/*选择register_link后隐藏登录界面*/
+			/* 选择register_link后隐藏登录界面 */
 			Auth.vars.lowin_login.style.display = 'none';
 		}, 500);
 		/*显示注册界面*/
@@ -32,6 +32,25 @@ var Auth = {
 
 		e.preventDefault();
 	},
+    loginNo() {
+        Auth.vars.lowin_register.classList.remove('lowin-animated-flip');
+        Auth.vars.lowin_register.className += ' lowin-animated-flipback';
+        setTimeout(() => {
+            /*选择login_link后隐藏注册界面*/
+            Auth.vars.lowin_register.style.display = 'none';
+        }, 500);
+        /*显示登录界面*/
+        Auth.vars.lowin_login.style.display = 'block';
+        Auth.vars.lowin_login.classList.remove('lowin-animated');
+        Auth.vars.lowin_login.className += ' lowin-animatedback';
+
+        setTimeout(() => {
+            Auth.vars.lowin_register.classList.remove('lowin-animated-flipback');
+            Auth.vars.lowin_login.classList.remove('lowin-animatedback');
+        },1000);
+
+        Auth.setHeight(Auth.vars.lowin_login.offsetHeight + Auth.vars.lowin_footer.offsetHeight);
+    },
 	login(e) {
 		Auth.vars.lowin_register.classList.remove('lowin-animated-flip');
         Auth.vars.lowin_register.className += ' lowin-animated-flipback';
@@ -140,4 +159,4 @@ var Auth = {
 			Auth.loginback(e);
 		});
 	}
-}
+};
