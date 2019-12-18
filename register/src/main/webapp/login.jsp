@@ -73,9 +73,6 @@
     let nameresultBoolean = true;
     /* 如果密码验证结果正确就为true,格式错误则为false */
     let pwdresultBoolean = true;
-    const name = $("#name").val();
-    const email = $("#email").val();
-    const password = $("#password").val();
     /* 用于登录注册界面跳转的功能 */
     Auth.init({
         login_url: '#login',
@@ -105,6 +102,9 @@
 
     /* 注册用户 */
     function register() {
+        const name = $("#name").val();
+        const email = $("#email").val();
+        const password = $("#password").val();
         if (name !== "" && email !== "" && password !== "") {
             $.ajax({
                 url: "/user/register",
@@ -162,6 +162,9 @@
 
     /* 验证注册信息是否重复 */
     function verificationRepeat() {
+        const name = $("#name").val();
+        const email = $("#email").val();
+        const password = $("#password").val();
         /* 每次执行这个函数都清空name、email等input下面生成的描述语句 */
         $("#namep,#emailp,#passwordp").remove();
         /* 重置三者的值 */
@@ -219,6 +222,9 @@
     }
 
     $(function () {
+        const name = $("#name").val();
+        const email = $("#email").val();
+        const password = $("#password").val();
         if (name === "" || email === "" || password === "") {
             signup_disabled();
         }
