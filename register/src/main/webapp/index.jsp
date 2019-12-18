@@ -217,7 +217,7 @@
     <script>
         $(document).ready(function () {
             $("#login_a").on('click', function () {
-                popWin.showWin("800", "600", "欢迎使用本网站", "login.jsp");
+                popWin.showWin("750", "700", "欢迎使用本网站", "login.jsp");
             });
         });
     </script>
