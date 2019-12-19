@@ -1,5 +1,6 @@
 package cn.myllxy.register.web.controller;
 
+import cn.myllxy.register.common.CheckDup;
 import cn.myllxy.register.domain.User;
 import cn.myllxy.register.service.impl.Userinfoserviceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,18 +31,7 @@ public class UserController {
             @RequestParam(value = "email", defaultValue = "") String email) {
         Map<String, String> map = new HashMap<>();
         User user = ui.checkDuplicateregist(name, email);
-        // 用户名或者邮箱已经存在，向前台反映
-        if (user != null) {
-            if (user.getName().equals(name)) {
-                map.put("name", "用户名重复,不可以注册");
-            }
-            if (user.getEmail().equals(email)) {
-                map.put("email", "邮箱重复,不可以注册");
-            }
-        } else {
-            map.put("result", "可以注册");
-        }
-        return map;
+        return CheckDup.checkDuplicateregist(user, map, name, email);
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
