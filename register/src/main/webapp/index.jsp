@@ -310,12 +310,12 @@
     </header><!-- header-nav -->
     <div class="slider-area" id="home">
         <div class="slider-carousel owl-theme">
-            <!-- 轮播图 -->
-            <video src="assets/myextravideo/flydog.mp4" width="100%" height="100%" autoplay="autoplay" loop="loop"
-                   controls="controls">
-            </video>
             <div class="single-slides2"></div>
             <div class="single-slides3"></div>
+            <!-- 轮播图 -->
+            <video src="assets/myextravideo/flydog.mp4" width="100%" height="100%" autoplay="autoplay" loop="loop"
+            controls="controls">
+            </video>
         </div> <!-- slider-carousel -->
         <!-- 播放器 -->
         <div class="js-info-album-player" id="js-info-album-player">

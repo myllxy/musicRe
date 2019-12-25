@@ -4,33 +4,57 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          id="WebApp_ID" version="3.1">
     <display-name>musicRe</display-name>
-    <!-- 配置DispatcherServlet -->
+    <!--SpringMVC的配置和Spring的配置要单独读取，否则后面集成其它框架会出问题-->
+    <!--运行与读取spring的配置-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+
+    <!--配置mvc的核心控制器-->
     <servlet>
-        <servlet-name>springDispatcherServlet</servlet-name>
+        <servlet-name>dispatchServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--读取mvc配置-->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:applicationContext.xml</param-value>
+            <param-value>classpath:applicationContext-mvc.xml</param-value>
         </init-param>
+        <!--tomcat启动用创建-->
         <load-on-startup>1</load-on-startup>
     </servlet>
-
-    <!-- Map all requests to the DispatcherServlet for handling -->
     <servlet-mapping>
-        <servlet-name>springDispatcherServlet</servlet-name>
-        <!-- 加了*会拦截当成servlet，这样你的jsp就显示不出来了，显示出来的是代码 -->
+        <servlet-name>dispatchServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <!--编码过滤-->
     <filter>
-        <filter-name>encoding</filter-name>
+        <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
         <init-param>
             <param-name>encoding</param-name>
-            <param-value>utf-8</param-value>
+            <param-value>UTF-8</param-value>
         </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+
     </filter>
     <filter-mapping>
-        <filter-name>encoding</filter-name>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>OpenEntityManagerInViewFilter</filter-name>
+        <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>OpenEntityManagerInViewFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 </web-app>

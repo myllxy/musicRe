@@ -1,10 +1,15 @@
 package cn.myllxy.register.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * @author nsu_zk
  * @create 2019-12-01 13:26
  */
-public class User {
+@Entity
+@Table(name = "user")
+public class User extends BaseDomain{
     private String name;
     private String password;
     private String email;

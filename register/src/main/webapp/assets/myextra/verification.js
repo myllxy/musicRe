@@ -1,5 +1,5 @@
 /* 如果邮箱验证结果正确就为true,格式错误则为false */
-let eamilresultBoolean = true;
+let emailresultBoolean = true;
 /* 如果用户名验证结果正确就为true,格式错误则为false */
 let nameresultBoolean = true;
 /* 如果密码验证结果正确就为true,格式错误则为false */
@@ -69,46 +69,57 @@ function register() {
 }
 
 /* 验证注册信息是否错误 */
-function verificationformat(name, email, password, reg) {
+function verificationformat(name, email, reg) {
     if (name !== "" && name.length > 6) {
         $("#namep").remove();
         $("#name").after('<p id="namep">用户名过长</p>');
         nameresultBoolean = false;
         signup_disabled();
     }
-    if (email !== "" && !reg.test(email)) {
+    if (name !== "" && name.length <= 6) {
+        nameresultBoolean = true;
+    }
+    if (email !== "" && reg !== "" && !reg.test(email)) {
         $("#email").after('<p id="emailp">邮箱格式输入错误</p>');
         /*1.更改按键颜色
         * 2.设置按键为不可以点击(即解除或者更换绑定事件)
-        * 3.设置变量eamilresultBoolean为false以后要用
+        * 3.设置变量emailresultBoolean为false以后要用
         * */
-        eamilresultBoolean = false;
+        emailresultBoolean = false;
         signup_disabled();
     }
-    if (password !== "" && password.length > 8) {
-        $("#password").after('<p id="passwordp">密码过长</p>');
-        pwdresultBoolean = false;
-        signup_disabled();
+    if (email !== "" && reg !== "" && reg.test(email)) {
+        emailresultBoolean = true;
+    }
+}
+
+function verificationformat_password(password) {
+    if (password !== "") {
+        if (password.length > 8) {
+            $("#passwordp").remove();
+            $("#password").after('<p id="passwordp">密码过长</p>');
+            pwdresultBoolean = false;
+            signup_disabled();
+        } else {
+            pwdresultBoolean = true;
+        }
     }
 }
 
 /* 验证注册信息是否重复 */
+
+/* 密码不参与该函数,因为不用考虑重复值,所以密码只需绑定验证格式的函数 */
 function verificationRepeat() {
     const name = $("#name").val();
     const email = $("#email").val();
-    const password = $("#password").val();
     /* 每次执行这个函数都清空name、email等input下面生成的描述语句 */
-    $("#namep,#emailp,#passwordp").remove();
-    /* 重置三者的值 */
-    eamilresultBoolean = true;
-    nameresultBoolean = true;
-    pwdresultBoolean = true;
+    $("#namep,#emailp").remove();
     /* 正则表达式：
      * 字母或数字开始可以加下划线或者"-",然后是@,然后是任意字母或字符串,然后是.,然后是2到4个字母
      * */
     const reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-    /* 首先验证用户名、邮箱、密码格式是否正确 */
-    verificationformat(name, email, password, reg);
+    /* 首先验证用户名、邮箱格式是否正确 */
+    verificationformat(name, email, reg);
     if (name !== "" || email !== "") {
         $.ajax({
             url: "/user/checkDuplicateregist",
@@ -134,13 +145,15 @@ function verificationRepeat() {
                         if (nameresultBoolean) {
                             $("#name").after('<p id="namep">' + result + '</p>');
                         }
-                        if (nameresultBoolean && eamilresultBoolean && pwdresultBoolean) {
+                        if (nameresultBoolean && emailresultBoolean && pwdresultBoolean) {
                             signup_enable();
                         }
                     }
                     if (email !== "" && reg.test(email) && i === "result") {
-                        $("#email").after('<p id="emailp">' + result + '</p>');
-                        if (nameresultBoolean && eamilresultBoolean && pwdresultBoolean) {
+                        if (emailresultBoolean) {
+                            $("#email").after('<p id="emailp">' + result + '</p>');
+                        }
+                        if (nameresultBoolean && emailresultBoolean && pwdresultBoolean) {
                             signup_enable();
                         }
                     }
@@ -152,6 +165,7 @@ function verificationRepeat() {
         });
     }
 }
+
 /* 当有任一input域为空时,注册按钮保持禁用状态 */
 $(function () {
     const name = $("#name").val();
@@ -164,8 +178,11 @@ $(function () {
 
 /*验证注册信息*/
 $(function () {
-    /* 鼠标移出对应组件即进行校验 */
-    $("#name,#email,#password").on("mouseout", verificationRepeat)
+    /* 组件内容发生变化对应组件即进行校验 */
+    $("#password").on("input propertychange", function () {
+        verificationformat_password($("#password").val())
+    });
+    $("#name,#email").on("input propertychange", verificationRepeat);
 });
 /* 注册用户 */
 $(function () {

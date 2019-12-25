@@ -5,6 +5,8 @@ import cn.myllxy.register.domain.User;
 import java.util.Map;
 
 /**
+ * 用于验证重复的注册
+ *
  * @author myllxy
  * @create 2019-12-19 11:04
  */
