@@ -36,15 +36,14 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> register(@RequestParam(value = "name", defaultValue = "") String name,
-                                        @RequestParam(value = "email", defaultValue = "") String email,
-                                        @RequestParam(value = "password", defaultValue = "") String password) {
+    public Map<String, String> register(User user) {
         Map<String, String> map = new HashMap<>();
         try {
-            ui.register(name, email, password);
+            ui.register(user);
             map.put("register_result", "注册成功!");
         } catch (Exception e) {
             map.put("register_result", "注册失败!");
+            e.printStackTrace();
         }
         return map;
     }

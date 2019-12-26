@@ -19,14 +19,15 @@
             <div class="lowin-box-inner">
                 <form method="post" id="login">
                     <div class="lowin-group">
-                        <label>Email <a href="#" class="login-back-link">Sign in?</a></label>
-                        <input type="email" autocomplete="email" name="email" class="lowin-input">
+                        <label>Name <a href="#" class="login-back-link">Sign in?</a></label>
+                        <input type="text" name="loginname" class="lowin-input" id="loginname">
                     </div>
                     <div class="lowin-group password-group">
                         <label>Password <a href="#" class="forgot-link">Forgot Password?</a></label>
-                        <input type="password" name="password" autocomplete="current-password" class="lowin-input">
+                        <input type="password" name="loginpassword" autocomplete="current-password"
+                               class="lowin-input" id="loginpassword">
                     </div>
-                    <button type="button" class="lowin-btn login-btn">
+                    <button type="button" class="lowin-btn login-btn" id="btn_login">
                         Sign In
                     </button>
                     <div class="text-foot">
@@ -67,5 +68,6 @@
 <script type="text/javascript" src="assets/js/jquery.min.js"></script>
 <script src="assets/myextra/auth.js"></script>
 <script type="text/javascript" src="assets/myextra/verification.js"></script>
+<script type="text/javascript" src="assets/myextra/login.js"></script>
 </body>
 </html>

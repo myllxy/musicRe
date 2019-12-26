@@ -8,8 +8,5 @@ import cn.myllxy.register.domain.User;
  */
 public interface IUserinfoservice extends IBaseService<User, Long> {
     User checkDuplicateregist(String name, String email);
-
-    void register(String name, String email, String password);
-
     User findByName(String name);
 }

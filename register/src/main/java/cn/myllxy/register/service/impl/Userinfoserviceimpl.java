@@ -20,9 +20,8 @@ public class Userinfoserviceimpl extends BaseServiceImpl<User, Long> implements 
         return userRepository.checkDuplicateregist(name, email);
     }
 
-    @Override
-    public void register(String name, String email, String password) {
-        userRepository.register(name, email, password);
+    public void register(User user) {
+        userRepository.save(user);
     }
 
     @Override

@@ -14,24 +14,28 @@
     <bean id="myRealm" class="cn.myllxy.register.shiro.MyRealm">
         <!--Realm的名称-->
         <property name="name" value="myRealm"/>
-        <property name="credentialsMatcher">
-            <!-- 配置哈希密码匹配器 -->
-            <!-- 数据库中的密码是按照一定的加密方式和迭代次数加密的 -->
-            <!-- 我们判断登录成功的方式是比对客户端的输入密码加密后和数据库密码是否相同 -->
-            <!-- 客户端密码加密方式必须和数据库密码生成加密方式相同 -->
+<!--        <property name="credentialsMatcher">
+            &lt;!&ndash; 配置哈希密码匹配器 &ndash;&gt;
+            &lt;!&ndash; 数据库中的密码是按照一定的加密方式和迭代次数加密的 &ndash;&gt;
+            &lt;!&ndash; 我们判断登录成功的方式是比对客户端的输入密码加密后和数据库密码是否相同 &ndash;&gt;
+            &lt;!&ndash; 客户端密码加密方式必须和数据库密码生成加密方式相同 &ndash;&gt;
             <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
-                <!--加密方式:MD5-->
+                &lt;!&ndash;加密方式:MD5&ndash;&gt;
                 <property name="hashAlgorithmName" value="MD5"/>
-                <!--迭代次数-->
+                &lt;!&ndash;迭代次数&ndash;&gt;
                 <property name="hashIterations" value="10"/>
             </bean>
-        </property>
+        </property>-->
     </bean>
     <!-- 这三个配置好，可以支持注解权限 -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
     <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
           depends-on="lifecycleBeanPostProcessor"/>
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!--必需要用到权限管理器-->
         <property name="securityManager" ref="securityManager"/>
     </bean>
 </beans>

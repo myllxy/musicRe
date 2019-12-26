@@ -1,9 +1,9 @@
 /* 如果邮箱验证结果正确就为true,格式错误则为false */
-let emailresultBoolean = true;
+let emailresultBoolean = false;
 /* 如果用户名验证结果正确就为true,格式错误则为false */
-let nameresultBoolean = true;
+let nameresultBoolean = false;
 /* 如果密码验证结果正确就为true,格式错误则为false */
-let pwdresultBoolean = true;
+let pwdresultBoolean = false;
 /* 用于登录注册界面跳转的功能 */
 Auth.init({
     login_url: '#login',

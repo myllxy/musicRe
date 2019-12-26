@@ -1,7 +1,6 @@
 package cn.myllxy.register.shiro;
 
 
-import cn.myllxy.register.common.MD5utils;
 import cn.myllxy.register.domain.User;
 import cn.myllxy.register.service.IUserinfoservice;
 import org.apache.shiro.authc.*;
@@ -9,7 +8,6 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -44,8 +42,10 @@ public class MyRealm extends AuthorizingRealm {
         // 2.2 根据用户名从数据库中拿到密码(以后会拿用户对象)
         // 2.3 如果没有拿到密码(没有通过用户名拿到相应的用户->用户不存在)
         User user = userinfoservice.findByName(username);
-        ByteSource salt = ByteSource.Util.bytes(MD5utils.SALT);
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user, user.getPassword(), salt, getName());
+        if (user == null) {
+            return null;
+        }
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user, user.getPassword(), getName());
         return authenticationInfo;
     }
 }
