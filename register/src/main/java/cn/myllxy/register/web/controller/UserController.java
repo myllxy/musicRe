@@ -1,6 +1,5 @@
 package cn.myllxy.register.web.controller;
 
-import cn.myllxy.register.common.CheckDup;
 import cn.myllxy.register.domain.User;
 import cn.myllxy.register.service.impl.Userinfoserviceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +23,17 @@ public class UserController {
     @Autowired
     private Userinfoserviceimpl ui;
 
+    /**
+     * 前台会做一个判断,如果email和name输入框为空,是不会发送ajax请求的
+     *
+     * @param name
+     * @param email
+     * @return
+     */
     @RequestMapping(value = "/checkDuplicateregist", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> checkDuplicateregist(
-            @RequestParam(value = "name", defaultValue = "") String name,
-            @RequestParam(value = "email", defaultValue = "") String email) {
-        Map<String, String> map = new HashMap<>();
-        User user = ui.checkDuplicateregist(name, email);
-        return CheckDup.checkDuplicateregist(user, map, name, email);
+    public Map checkDuplicateregist(String name, String email) {
+        return ui.getDuplicateRegistInfoMap(name, email);
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

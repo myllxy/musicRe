@@ -26,7 +26,7 @@ function signup_disabled() {
     const btn_regist = $("#btn_regist");
     if (btn_regist.hasClass("lowin-btn")) {
         btn_regist.removeClass("lowin-btn");
-        btn_regist.off("click");
+        btn_regist.off("click", register);
         btn_regist.addClass("lowin-btn-deprecated");
     }
 }
@@ -130,29 +130,27 @@ function verificationRepeat() {
                 "email": email
             },
             success: function (data) {
+                /* 设置一个标志位 */
+                data.isempty = true;
                 for (const i in data) {
                     const result = data[i];
                     /* 前两个重复,后两个正常了 */
                     if (name !== "" && i === "name") {
+                        data.isempty = false;
                         $("#name").after('<p id="namep">' + result + '</p>');
                         signup_disabled();
                     }
                     if (email !== "" && i === "email") {
+                        data.isempty = false;
                         $("#email").after('<p id="emailp">' + result + '</p>');
                         signup_disabled();
                     }
-                    if (name !== "" && i === "result") {
-                        if (nameresultBoolean) {
-                            $("#name").after('<p id="namep">' + result + '</p>');
-                        }
+                    if (name !== "" && data.isempty === true) {
                         if (nameresultBoolean && emailresultBoolean && pwdresultBoolean) {
                             signup_enable();
                         }
                     }
-                    if (email !== "" && reg.test(email) && i === "result") {
-                        if (emailresultBoolean) {
-                            $("#email").after('<p id="emailp">' + result + '</p>');
-                        }
+                    if (email !== "" && reg.test(email) && data.isempty === true) {
                         if (nameresultBoolean && emailresultBoolean && pwdresultBoolean) {
                             signup_enable();
                         }
