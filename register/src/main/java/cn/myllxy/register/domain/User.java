@@ -9,10 +9,11 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "user")
-public class User extends BaseDomain{
+public class User extends BaseDomain {
     private String name;
     private String password;
     private String email;
+    private String headImg;
 
     @Override
     public String toString() {
@@ -20,7 +21,23 @@ public class User extends BaseDomain{
                 "name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", headImg='" + headImg + '\'' +
                 '}';
+    }
+
+    public String getHeadImg() {
+        return headImg;
+    }
+
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
+    }
+
+    public User(String name, String password, String email, String headImg) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.headImg = headImg;
     }
 
     public String getName() {

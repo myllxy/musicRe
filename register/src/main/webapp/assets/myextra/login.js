@@ -32,11 +32,15 @@ function login() {
             },
             success: function (data) {
                 if (data.msg) {
-                    alert(data.msg);
+                    /* 然后将登录替换成用户头像 */
+                    /* 刷新整个页面 */
+                    judgeUser();
                 }
             },
             error: function (data) {
-                alert(data);
+                if (data.msg) {
+                    alert(data.msg);
+                }
             }
         });
     }
@@ -44,7 +48,30 @@ function login() {
 
 $(function () {
     $("#btn_login").on("click", login);
+    /* 点击注册时清空登录表单 */
+    $("#register-link").on("click", clearForm);
 });
+
+function clearForm() {
+    $("#login")[0].reset();
+}
+
+/* 向后台发送请求获得当前登录实体 */
+function judgeUser() {
+    $.ajax({
+        url: "/hasUser",
+        type: "POST",
+        dataType: "json",
+        /* 这这里后台能返回已经解析成json的user实体 */
+        success: function (data) {
+            /* 刷新最顶层对象,因为当前页面是个iframe */
+            top.location.reload();
+        },
+        error: function (data) {
+
+        }
+    });
+}
 
 /* 当有任一input域为空时,注册按钮保持禁用状态 */
 $(function () {

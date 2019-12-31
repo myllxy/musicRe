@@ -16,7 +16,10 @@ function signup_enable() {
     const btn_regist = $("#btn_regist");
     if (btn_regist.hasClass("lowin-btn-deprecated")) {
         btn_regist.removeClass("lowin-btn-deprecated");
-        btn_regist.on("click", register);
+        /* 防止多次绑定事件 */
+        if (!btn_regist.data("events")) {
+            btn_regist.on("click", register);
+        }
         btn_regist.addClass("lowin-btn")
     }
 }
@@ -46,7 +49,7 @@ function register() {
                 "email": email,
                 "password": password
             },
-            success: function (data) {
+            success: function (data, e) {
                 for (const i in data) {
                     const result = data[i];
                     if (i === "register_result") {
@@ -57,7 +60,7 @@ function register() {
                         $("#namep,#emailp,#password").remove();
                         /* 同时跳转到登录页面 */
                         Auth.brand();
-                        Auth.loginNo();
+                        Auth.login(e);
                     }
                 }
             },
@@ -181,8 +184,4 @@ $(function () {
         verificationformat_password($("#password").val())
     });
     $("#name,#email").on("input propertychange", verificationRepeat);
-});
-/* 注册用户 */
-$(function () {
-    $("#btn_regist").on("click", register)
 });

@@ -12,6 +12,10 @@ public class JsonResult {
     public JsonResult() {
     }
 
+    public JsonResult(String msg) {
+        this.msg = msg;
+    }
+
     public JsonResult(boolean success, String msg) {
         this.success = success;
         this.msg = msg;

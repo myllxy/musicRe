@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -267,41 +268,55 @@
                         <input type="submit" value="搜索" class="btn-primary" style="bottom: -24px;margin-left: -48px;">
                     </form>
                 </div>
-                <!-- 头像 -->
-                <!-- 						<div class="col-md-1 col-sm-3" style="padding-left: 49px;bottom: -17px;margin-bottom: -56px;">
-                    <div class="logo">
-                        <div class="cssmenu" data-title="Menu" style="margin-top: -10px;left: 91px;right: -94px;top: -73px;padding-right: 15px;">
-                            <ul>
-                                <li><a href="index.jsp"><img src="assets/images/woqi.png" alt="Devaid logo" class="img-circle img-responsive img-thumbnail">
-                                    </a>
-                                    <ul class="dropdown-menu" id="repalce">
-                                        <li><a href="index.jsp">我的主页</a></li>
-                                        <li><a href="index2.html">我的消息</a></li>
-                                        <li><a href="index2.html">我的等级</a></li>
-                                        <li><a href="index2.html">个人设置</a></li>
-                                        <li><a href="index2.html">退出</a></li>
-                                        <li><a href="photo-gallary.html">商城</a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="photo-gallary.html">Photo Gallary</a></li>
-                                                <li><a href="single-photo-gallary.html">Single Photo Gallary</a></li>
-                                                <li><a href="video-gallary.html">Video Gallary</a></li>
-                                                <li><a href="single-video-gallary.html">Single Video Gallary</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="col-md-1 col-sm-3" style="padding-left: 49px;bottom: -17px;margin-bottom: -56px;">
                     <div class="logo">
                         <div class="cssmenu" data-title="Menu"
                              style="margin-top: -10px;left: 91px;right: -94px;top: -73px;padding-right: 15px;">
-                            <!-- 登陆成功后将以下ul替换成用户图像 -->
-                            <ul style="margin-top: 20px;" id="bereplace">
-                                <li><a href="javascript:void(0)" id="login_a">登录</a></li>
-                            </ul>
+                            <shiro:authenticated>
+                                <div id="replace" class="col-md-1 col-sm-3"
+                                     style="padding-left: 49px;bottom: -17px;margin-bottom: -56px;">
+                                    <div class="logo">
+                                        <div class="cssmenu" data-title="Menu"
+                                             style="margin-top: -10px;left: 91px;right: -94px;top: -73px;padding-right: 15px;">
+                                            <ul style="left: -150px;bottom: -50px;">
+                                                <li><a href="index.jsp">
+                                                    <img src="<shiro:principal property="headImg" />" alt="Devaid logo"
+                                                         class="img-circle img-responsive img-thumbnail">
+                                                </a>
+                                                    <ul class="dropdown-menu" id="repalce">
+                                                        <li><a href="index.jsp">我的主页</a></li>
+                                                        <li><a href="index2.html">我的消息</a></li>
+                                                        <li><a href="index2.html">我的等级</a></li>
+                                                        <li><a href="index2.html">个人设置</a></li>
+                                                        <li><a href="/logout">退出</a></li>
+                                                        <li><a href="photo-gallary.html">商城</a>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a href="photo-gallary.html">Photo Gallary</a>
+                                                                </li>
+                                                                <li><a href="single-photo-gallary.html">Single Photo
+                                                                    Gallary</a></li>
+                                                                <li><a href="video-gallary.html">Video Gallary</a>
+                                                                </li>
+                                                                <li><a href="single-video-gallary.html">Single Video
+                                                                    Gallary</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </shiro:authenticated>
+                            <!-- 登陆成功后将以下元素替换成用户图像 -->
+                            <!-- 头像 -->
+                            <shiro:guest>
+                                <ul style="margin-top: 20px;">
+                                    <li id="bereplace" style="display: block"><a href="javascript:void(0)" id="login_a">登录</a>
+                                    </li>
+                                </ul>
+                            </shiro:guest>
+
                         </div>
                     </div>
                 </div>
@@ -314,7 +329,7 @@
             <div class="single-slides3"></div>
             <!-- 轮播图 -->
             <video src="assets/myextravideo/flydog.mp4" width="100%" height="100%" autoplay="autoplay" loop="loop"
-            controls="controls">
+                   controls="controls">
             </video>
         </div> <!-- slider-carousel -->
         <!-- 播放器 -->
