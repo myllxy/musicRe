@@ -44,170 +44,7 @@
     <!-- color -->
     <link rel="stylesheet" href="assets/css/color.css">
     <link rel="stylesheet" href="assets/css/search.css">
-    <style>
-        .content-topic {
-            margin: 0px auto;
-            padding: 20px 0px;
-        }
-
-        .content-what {
-            width: 1600px;
-            text-align: center;
-        }
-
-        .content-what .what-list {
-            font-size: 0;
-            height: 448px;
-        }
-
-        .content-what .what-item {
-            display: inline-block;
-            position: relative;
-            width: 60px;
-            margin-left: -2px;
-            line-height: 1.6;
-            font-size: 14px;
-            text-align: center;
-            vertical-align: middle;
-            background-color: #fff;
-            color: #323232;
-            border-radius: 4px;
-            box-shadow: 0 0 10px 0 rgba(0, 0, 0, .15);
-            transition: width .5s ease, height .5s ease, box-shadow .3s ease;
-            cursor: pointer
-        }
-
-        .content-backers .backers-detail, .content-invers .invers-item {
-            box-shadow: 0 0 4px 0 rgba(179, 179, 179, .17), inset 0 -3px 0 0 rgba(103, 77, 199, .05)
-        }
-
-        .content-what .what-item:hover {
-            background-image: linear-gradient(160deg, rgba(101, 70, 194, .2) 0, rgba(119, 115, 228, .2) 50%, rgba(93, 136, 238, .2) 100%)
-        }
-
-        .content-what .what-item .what-item-bg {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            border-radius: 4px;
-            box-shadow: 0 0 10px 0 rgba(0, 0, 0, .15);
-            transition: opacity .4s ease .1s
-        }
-
-        .content-what .what-item span {
-            visibility: visible;
-            transition: opacity .15s ease .4s;
-            position: absolute;
-            width: 14px;
-            top: 50%;
-            left: 22px;
-            transform: translateY(-50%)
-        }
-
-        .content-what .what-item-1 .what-item-bg {
-            background: url("assets/myextraimg/t1.png") center/cover no-repeat;
-            background-size: 100%;
-        }
-
-        .content-what .what-item-2 .what-item-bg {
-            background: url("assets/myextraimg/t2.png") center/cover no-repeat;
-            background-size: 100%;
-        }
-
-        .content-what .what-item-3 .what-item-bg {
-            background: url("assets/myextraimg/t3.png") center/cover no-repeat;
-            background-size: 100%;
-        }
-
-        .content-what .what-item-4 .what-item-bg {
-            background: url("assets/myextraimg/t4.png") center/cover no-repeat;
-            background-size: 100%;
-        }
-
-        .content-what .what-item-5 .what-item-bg {
-            background: url("assets/myextraimg/t5.png") center/cover no-repeat;
-            background-size: 100%;
-        }
-
-        .content-what .what-item-6 .what-item-bg {
-            background: url("assets/myextraimg/t6.png") center/cover no-repeat;
-            background-size: 100%;
-        }
-
-        .content-what .what-item-7 .what-item-bg {
-            background: url("assets/myextraimg/t7.png") center/cover no-repeat;
-            background-size: 100%;
-        }
-
-        .content-what .what-item-active {
-            width: 857px;
-            height: 441px !important;
-            background-size: cover;
-            margin-right: 2px;
-            z-index: 9 !important;
-            transition: width .4s ease, height .4s ease;
-        }
-
-        .content-what .what-item-active span {
-            visibility: hidden;
-            opacity: 0
-        }
-
-        .content-what .what-item-active .what-item-bg {
-            transition: opacity .5s ease 0s;
-            opacity: 1;
-            visibility: visible
-        }
-
-        .content-what .what-item:nth-child(1) {
-            height: 388px;
-            padding: 0 22px;
-            z-index: 1
-        }
-
-        .content-what .what-item:nth-child(2) {
-            height: 408px;
-            padding: 0 22px;
-            z-index: 3
-        }
-
-        .content-what .what-item:nth-child(3) {
-            height: 428px;
-            padding: 0 22px;
-            z-index: 5
-        }
-
-        .content-what .what-item:nth-child(4) {
-            height: 448px;
-            padding: 0 22px;
-            z-index: 7
-        }
-
-        .content-what .what-item:nth-child(5) {
-            height: 428px;
-            padding: 0 22px;
-            z-index: 5
-        }
-
-        .content-what .what-item:nth-child(6) {
-            height: 408px;
-            padding: 0 22px;
-            z-index: 3
-        }
-
-        .content-what .what-item:nth-child(7) {
-            height: 388px;
-            padding: 0 22px;
-            z-index: 2
-        }
-
-        .content-main {
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/myextra/accordion.css">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta charset="UTF-8">
@@ -246,7 +83,8 @@
                                 </li>
                                 <!-- 然后将此页面设置为active，并且将原页面取消active，本质就是新增或取消active类 -->
                                 <!-- 这里选择使用jQuery绑定一个点击事件 -->
-                                <li id="discovermusic"><a href="#album" style="margin-bottom: auto;" id="changeActive">发现音乐</a>
+                                <li id="discovermusic"><a href="#album" style="margin-bottom: auto;"
+                                                          id="changeActive">发现音乐</a>
                                 </li>
                                 <li><a href="event.html" style="margin-bottom: auto;">朋友</a>
                                 </li>
@@ -286,8 +124,7 @@
                                                     <ul class="dropdown-menu" id="repalce">
                                                         <li><a href="index.jsp">我的主页</a></li>
                                                         <li><a href="index2.html">我的消息</a></li>
-                                                        <li><a href="index2.html">我的等级</a></li>
-                                                        <li><a href="index2.html">个人设置</a></li>
+                                                        <li><a href="/user/setting">个人设置</a></li>
                                                         <li><a href="/logout">退出</a></li>
                                                         <li><a href="photo-gallary.html">商城</a>
                                                             <ul class="dropdown-menu">
@@ -312,11 +149,11 @@
                             <!-- 头像 -->
                             <shiro:guest>
                                 <ul style="margin-top: 20px;">
-                                    <li id="bereplace" style="display: block"><a href="javascript:void(0)" id="login_a">登录</a>
+                                    <li id="bereplace" style="display: block"><a href="javascript:void(0)"
+                                                                                 id="login_a">登录</a>
                                     </li>
                                 </ul>
                             </shiro:guest>
-
                         </div>
                     </div>
                 </div>

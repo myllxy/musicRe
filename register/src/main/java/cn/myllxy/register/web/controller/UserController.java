@@ -49,4 +49,9 @@ public class UserController {
         }
         return map;
     }
+
+    @RequestMapping(value = "/setting")
+    public String setting() {
+        return "userinfo";
+    }
 }

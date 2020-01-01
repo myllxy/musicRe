@@ -13,6 +13,7 @@
       <w>loginname</w>
       <w>loginpassword</w>
       <w>mouseout</w>
+      <w>myextra</w>
       <w>myllxy</w>
       <w>namep</w>
       <w>nameresult</w>
@@ -22,6 +23,7 @@
       <w>regist</w>
       <w>shiro</w>
       <w>signup</w>
+      <w>userinfo</w>
       <w>userinfoservice</w>
       <w>userinfoserviceimpl</w>
       <w>verificationformat</w>
