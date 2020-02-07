@@ -1,6 +1,5 @@
 package cn.myllxy.register.service.impl;
 
-import cn.myllxy.register.common.CheckDup;
 import cn.myllxy.register.domain.User;
 import cn.myllxy.register.repository.UserRepository;
 import cn.myllxy.register.service.IUserinfoservice;
@@ -57,6 +56,12 @@ public class Userinfoserviceimpl extends BaseServiceImpl<User, Long> implements 
         userRepository.save(user);
     }
 
+    /**
+     * 用于登录
+     *
+     * @param name
+     * @return
+     */
     @Override
     public User findByName(String name) {
         return userRepository.findFirstByName(name);

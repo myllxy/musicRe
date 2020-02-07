@@ -52,6 +52,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script src="assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="assets/myextra/popwin.js"></script>
+    <script type="text/javascript" src="assets/myextra/searchmusic.js"></script>
     <script>
         $(document).ready(function () {
             $("#login_a").on('click', function () {
@@ -101,9 +102,14 @@
                     <form class="js-footer-subscribe-form">
                         <div class="js-input-icon">
                             <input type="text" placeholder="音乐/电台" required=""
-                                   style="padding-left: 27px;margin-left: 40px;margin-top: 24px;">
+                                   style="padding-left: 27px;margin-left: 40px;margin-top: 24px;" id="searchmusic">
                         </div>
-                        <input type="submit" value="搜索" class="btn-primary" style="bottom: -24px;margin-left: -48px;">
+                        <input type="submit" value="搜索" class="btn-primary" style="bottom: -24px;margin-left: -48px;"
+                               id="btn_search">
+                        <div id="tips"
+                             style="color:chartreuse;background: #9acfea; display: none; width: 252px;
+                             border: 1px solid pink;margin-top: 2px;margin-left: 39px;margin-right: 4px;padding-right: -15px;">
+                        </div>
                     </form>
                 </div>
                 <div class="col-md-1 col-sm-3" style="padding-left: 49px;bottom: -17px;margin-bottom: -56px;">
@@ -402,7 +408,7 @@
         }
     });
     $('#mymusic').on('click', function (e) {
-        var list = $('#menu_list li')
+        var list = $('#menu_list li');
         for (var i = 0; i < list.length; i++) {
             if ($(list[i]).hasClass("active")) {
                 $(list[i]).removeClass("active")
